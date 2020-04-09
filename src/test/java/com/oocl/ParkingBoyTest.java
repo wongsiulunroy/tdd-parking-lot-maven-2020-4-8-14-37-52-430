@@ -22,18 +22,24 @@ public class ParkingBoyTest {
 
         Assert.assertEquals(car, fetchedCar);
     }
+    @Test
+    public void should_not_return_car_when_parkingBoy_fetch_with_incorrect_parkingTicket(){
+        ParkingBoy parkingBoy = new ParkingBoy();
+        Car car = new Car();
+        ParkingTicket parkingTicket1 = new ParkingTicket();
+        Car fetchedCar = parkingBoy.fetch(parkingTicket1);
+        Assert.assertNull(fetchedCar);
+    }
 
     @Test
-    public void should_return_right_car_when_parkingBoy_fetch_with_right_parkingTicket(){
+    public void should_not_return_car_when_parkingBoy_fetch_with_used_parkingTicket(){
         ParkingBoy parkingBoy = new ParkingBoy();
         Car car = new Car();
         ParkingTicket parkingTicket = parkingBoy.park(car);
-        Car car2 = new Car();
+        parkingBoy.fetch(parkingTicket);
         Car fetchedCar = parkingBoy.fetch(parkingTicket);
-
-        Assert.assertEquals(car, fetchedCar);
+        Assert.assertNull(fetchedCar);
     }
-
 
 
 }
