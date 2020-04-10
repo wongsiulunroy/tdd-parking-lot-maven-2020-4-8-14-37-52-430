@@ -5,6 +5,8 @@ import java.util.Map;
 
 
 public class ParkingLot {
+
+
     private final int capacity;
     private Map<ParkingTicket, Car> parkingTicketMap = new HashMap();
 
@@ -20,7 +22,7 @@ public class ParkingLot {
         if(isFull()){
             throw new ParkingLotFullException();
         }
-        if (car==null){
+        if (car == null){
             return null;
         }
         if(parkingTicketMap.containsValue(car)){
@@ -46,6 +48,13 @@ public class ParkingLot {
 
         Car car = this.parkingTicketMap.remove(parkingTicket);
         return car;
-}
+    }
 
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public Map<ParkingTicket, Car> getParkingTicketMap() {
+        return parkingTicketMap;
+    }
 }

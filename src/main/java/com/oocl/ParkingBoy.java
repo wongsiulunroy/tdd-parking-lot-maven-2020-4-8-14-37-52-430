@@ -8,8 +8,8 @@ public class ParkingBoy {
     private List<ParkingLot> parkingLots = new ArrayList<ParkingLot>();
     private ParkingLot parkingLot;
 
-    public ParkingBoy(ParkingLot... parkingLots) {
-        this.parkingLots.addAll(Arrays.asList(parkingLots));
+    public ParkingBoy(ParkingLot... parkingLot) {
+        this.parkingLots.addAll(Arrays.asList(parkingLot));
     }
 
     public ParkingTicket park(Car car) {
@@ -18,9 +18,17 @@ public class ParkingBoy {
     }
 
     public Car fetch(ParkingTicket parkingTicket)  {
-        if (parkingTicket ==null){
-            throw new MissingParkingTicket();
-        }
+        //if (parkingTicket ==null){
+        //    throw new MissingParkingTicket();
+        //}
         return this.parkingLots.get(0).fetch(parkingTicket);
+    }
+
+    public ParkingLot getParkingLot() {
+        return parkingLot;
+    }
+
+    public List<ParkingLot> getParkingLots() {
+        return parkingLots;
     }
 }
