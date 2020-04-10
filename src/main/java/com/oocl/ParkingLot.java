@@ -12,20 +12,40 @@ public class ParkingLot {
         this.capacity = capacity;
     }
 
+    public ParkingLot(){
+        this.capacity =10;
+    }
+
     public ParkingTicket park(Car car) {
-        if(this.capacity == parkingTicketMap.size()){
+        if(isFull()){
+            throw new ParkingLotFullException();
+        }
+        if (car==null){
             return null;
         }
+        if(parkingTicketMap.containsValue(car)){
+            return null;
+        }
+
         ParkingTicket parkingTicket = new ParkingTicket();
         this.parkingTicketMap.put(parkingTicket, car);
         return parkingTicket;
     }
 
+    public boolean isFull() {
+        return this.capacity == parkingTicketMap.size();
+    }
+
     public Car fetch(ParkingTicket parkingTicket) {
+        if (parkingTicket == null) {
+            throw new MissingParkingTicket();
+        }
         if (!this.parkingTicketMap.containsKey(parkingTicket)){
             throw new UnrecognisedParkingTicket();
         }
+
         Car car = this.parkingTicketMap.remove(parkingTicket);
         return car;
-    }
+}
+
 }

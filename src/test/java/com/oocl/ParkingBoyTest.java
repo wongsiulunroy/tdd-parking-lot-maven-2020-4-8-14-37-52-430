@@ -37,16 +37,30 @@ public class ParkingBoyTest {
         parkingBoy.fetch(new ParkingTicket());
     }
 
-    @Test
+    @Test //(expected = MissingParkingTicket.class)
     public void should_return_exception_message_when_fetch_with_no_parkingTicket(){
-        expectedException.expect(WithoutParkingTicket.class);
+        expectedException.expect(MissingParkingTicket.class);
         expectedException.expectMessage("Please provide your parking ticket.");
         ParkingLot parkingLot = new ParkingLot(10);
         ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
         Car car = new Car();
         ParkingTicket parkingTicket = parkingBoy.park(car);
-        parkingBoy.fetch(null);
+        System.out.println(parkingTicket);
+        parkingBoy.fetch(parkingTicket);
     }
+
+    @Test
+    public void should_return_exception_message_when_parkingLot_full(){
+        expectedException.expect(ParkingLotFullException.class);
+        expectedException.expectMessage("Not enough position.");
+        ParkingLot parkingLot = new ParkingLot(1);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+        Car car = new Car();
+        parkingBoy.park(new Car());
+        parkingBoy.park(car);
+        //parkingBoy.fetch(new ParkingTicket());
+    }
+
 
 
     @Test

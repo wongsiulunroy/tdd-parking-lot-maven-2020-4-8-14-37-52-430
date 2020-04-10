@@ -1,17 +1,26 @@
 package com.oocl;
 
-public class ParkingBoy {
-    ParkingLot parkingLot;
+import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
-    public ParkingBoy(ParkingLot parkingLot) {
-        this.parkingLot = parkingLot;
+public class ParkingBoy {
+    private List<ParkingLot> parkingLots = new ArrayList<ParkingLot>();
+    private ParkingLot parkingLot;
+
+    public ParkingBoy(ParkingLot... parkingLots) {
+        this.parkingLots.addAll(Arrays.asList(parkingLots));
     }
 
     public ParkingTicket park(Car car) {
-        return this.parkingLot.park(car);
+        ParkingLot selectedParking = this.parkingLots.stream().filter(parkingLot-> !parkingLot.isFull()).findFirst().get();
+        return selectedParking.park(car);
     }
 
     public Car fetch(ParkingTicket parkingTicket)  {
-        return this.parkingLot.fetch(parkingTicket);
+        if (parkingTicket ==null){
+            throw new MissingParkingTicket();
+        }
+        return this.parkingLots.get(0).fetch(parkingTicket);
     }
 }
