@@ -36,9 +36,32 @@ public class ParkingBoyTest {
         ParkingTicket parkingTicket = parkingBoy.park(car);
         parkingBoy.fetch(new ParkingTicket());
     }
+
+    @Test
+    public void should_return_exception_message_when_fetch_with_no_parkingTicket(){
+        expectedException.expect(WithoutParkingTicket.class);
+        expectedException.expectMessage("Please provide your parking ticket.");
+        ParkingLot parkingLot = new ParkingLot(10);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+        Car car = new Car();
+        ParkingTicket parkingTicket = parkingBoy.park(car);
+        parkingBoy.fetch(null);
+    }
+
+
     @Test
     public void should_park_in_second_parkingLot_when_first_parkingLot_isFull(){
-        
+        ParkingLot parkingLot = new ParkingLot(1);
+        ParkingLot parkingLot2 = new ParkingLot(10);
+
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLot,parkingLot2);
+        parkingBoy.park(new Car());
+
+        Car car = new Car();
+        ParkingTicket parkingTicket = parkingBoy.park(car);
+
+        Car fetchedCar = parkingLot2.fetch(parkingTicket);
+
     }
 
 }
