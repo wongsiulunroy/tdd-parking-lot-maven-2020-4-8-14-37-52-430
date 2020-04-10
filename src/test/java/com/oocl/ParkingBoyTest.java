@@ -41,12 +41,12 @@ public class ParkingBoyTest {
     public void should_return_exception_message_when_fetch_with_no_parkingTicket(){
         expectedException.expect(MissingParkingTicket.class);
         expectedException.expectMessage("Please provide your parking ticket.");
-        ParkingLot parkingLot = new ParkingLot(10);
+        ParkingLot parkingLot = new ParkingLot();
         ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
         Car car = new Car();
-        ParkingTicket parkingTicket = parkingBoy.park(car);
-        System.out.println(parkingTicket);
-        parkingBoy.fetch(parkingTicket);
+        //ParkingTicket parkingTicket = parkingBoy.park(null);
+        //System.out.println(parkingTicket);
+        parkingBoy.fetch(null);
     }
 
     @Test
