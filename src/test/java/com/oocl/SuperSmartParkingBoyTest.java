@@ -13,10 +13,8 @@ public class SuperSmartParkingBoyTest {
         Car car = new Car();
         Car car2 = new Car();
         superSmartParkingBoy.park(car);
-        ParkingTicket parkingTicket = SuperSmartParkingBoy.park(car2);
+        ParkingTicket parkingTicket = superSmartParkingBoy.park(car2);
         Car fetchedCar = parkingLot2.fetch(parkingTicket);
-
         Assert.assertEquals(car2, fetchedCar);
-
     }
 }

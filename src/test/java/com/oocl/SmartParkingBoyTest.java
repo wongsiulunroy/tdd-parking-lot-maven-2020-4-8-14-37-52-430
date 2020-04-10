@@ -12,6 +12,7 @@ public class SmartParkingBoyTest {
         Car car = new Car();
         ParkingTicket parkingTicket = smartParkingBoy.park(car);
         Car fetchedCar = parkingLot2.fetch(parkingTicket);
+
         Assert.assertEquals(car, fetchedCar);
     }
 }
