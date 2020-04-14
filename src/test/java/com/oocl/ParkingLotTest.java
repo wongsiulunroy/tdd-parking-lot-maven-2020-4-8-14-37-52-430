@@ -1,9 +1,14 @@
 package com.oocl;
 
 import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 public class ParkingLotTest {
+
+    @Rule
+    public ExpectedException expectedException = ExpectedException.none();
 
     @Test
     public void should_return_parkingTicket_when_parkingBoy_parks_car(){
@@ -24,6 +29,8 @@ public class ParkingLotTest {
     }
     @Test
     public void should_not_return_car_when_parkingBoy_fetch_with_incorrect_parkingTicket(){
+        expectedException.expect(UnrecognisedParkingTicket.class);
+        expectedException.expectMessage("Unrecognised Parking Ticket");
         ParkingLot parkingLot = new ParkingLot(10);
         Car car = new Car();
         ParkingTicket parkingTicket1 = new ParkingTicket();
@@ -33,6 +40,8 @@ public class ParkingLotTest {
 
     @Test
     public void should_not_return_car_when_parkingBoy_fetch_with_used_parkingTicket(){
+        expectedException.expect(UnrecognisedParkingTicket.class);
+        expectedException.expectMessage("Unrecognised Parking Ticket");
         ParkingLot parkingLot = new ParkingLot(10);
         Car car = new Car();
         ParkingTicket parkingTicket = parkingLot.park(car);
@@ -42,6 +51,8 @@ public class ParkingLotTest {
     }
     @Test
     public void should_not_park_car_when_parking_capacity_is_full(){
+        expectedException.expect(ParkingLotFullException.class);
+        expectedException.expectMessage("Not enough position.");
         ParkingLot parkingLot = new ParkingLot(1);
         Car car = new Car();
         Car car2 = new Car();
@@ -50,6 +61,7 @@ public class ParkingLotTest {
 
         Assert.assertNull(parkingTicket);
     }
+
 
 
 
